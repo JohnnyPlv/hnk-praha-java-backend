@@ -1,7 +1,9 @@
 package com.example.hnkprahabackend;
 
 import com.example.hnkprahabackend.models.Player;
+import com.example.hnkprahabackend.models.PlayerStatLeague;
 import com.example.hnkprahabackend.services.PlayerService;
+import com.example.hnkprahabackend.types.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,6 +25,21 @@ public class HnkPrahaBackendApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        playerService.addNewPlayer(new Player("Jan","Plavka", 6, "Obrance"));
+        Player honzaPlavka = playerService.addNewPlayer(new Player("Jan", "Plavka", 6, Position.OBRÁNCE,
+                new PlayerStatLeague("podzim 2010", 17, 139, 27, 0, 6, 2, 4)));
+        playerService.addNewPlayer(honzaPlavka);
+
+        Player pavelVagner = playerService.addNewPlayer(new Player("Pavel", "Vágner", 69, Position.ZÁLOŽNÍK,
+                new PlayerStatLeague("jaro 2008", 20, 155, 96, 0, 1, 1, 35)));
+        playerService.addNewPlayer(pavelVagner);
+
+    }
+
+    private void assignLeagueStats(Player player, PlayerStatLeague playerStatLeague) {
+        Player player1 = playerService.findPlayerByName(player.getLastName());
+
+        player1.setPlayerStatLeague(playerStatLeague);
+
+        playerService.updateNewPlayer(player1);
     }
 }

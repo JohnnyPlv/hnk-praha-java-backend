@@ -19,10 +19,34 @@ public class PlayerStatLeague {
     private Integer redCards;
     private Integer bestPlayedCount;
 
+    private Double goalPerMatch;
+
+
+    public PlayerStatLeague(String firstSeason,
+                            Integer seasonPlayed,
+                            Integer matchesPlayed,
+                            Integer goalsScored,
+                            Integer golieZeroMinutes,
+                            Integer yellowCards,
+                            Integer redCards,
+                            Integer bestPlayedCount) {
+        this.firstSeason = firstSeason;
+        this.seasonPlayed = seasonPlayed;
+        this.matchesPlayed = matchesPlayed;
+        this.goalsScored = goalsScored;
+        this.golieZeroMinutes = golieZeroMinutes;
+        this.yellowCards = yellowCards;
+        this.redCards = redCards;
+        this.bestPlayedCount = bestPlayedCount;
+        this.goalPerMatch = calculateAverageGoal(goalsScored,matchesPlayed);
+    }
 
     public PlayerStatLeague() {
     }
 
+    private Double calculateAverageGoal(Integer goalsScored, Integer matchesPlayed) {
+        return matchesPlayed.doubleValue() / goalsScored.doubleValue();
+    }
     public Long getId() {
         return id;
     }
@@ -93,5 +117,13 @@ public class PlayerStatLeague {
 
     public void setBestPlayedCount(Integer bestPlayedCount) {
         this.bestPlayedCount = bestPlayedCount;
+    }
+
+    public Double getGoalPerMatch() {
+        return goalPerMatch;
+    }
+
+    public void setGoalPerMatch(Double goalPerMatch) {
+        this.goalPerMatch = goalPerMatch;
     }
 }

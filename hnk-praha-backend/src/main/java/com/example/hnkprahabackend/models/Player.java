@@ -1,5 +1,7 @@
 package com.example.hnkprahabackend.models;
 
+import com.example.hnkprahabackend.types.Position;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,24 +16,37 @@ public class Player {
 
     private Integer jerseyNumber;
 
-    private String position;
+    private Position position;
 
     private boolean active;
 
     @OneToOne
     private PlayerStatTournament playerStatTournament;
 
-    @OneToOne
+    public PlayerStatLeague getPlayerStatLeague() {
+        return playerStatLeague;
+    }
+
+    public void setPlayerStatLeague(PlayerStatLeague playerStatLeague) {
+        this.playerStatLeague = playerStatLeague;
+    }
+
+    @OneToOne (cascade=CascadeType.ALL)
     private PlayerStatLeague playerStatLeague;
 
     public Player(String firstName,
                   String lastName,
                   Integer jerseyNumber,
-                  String position) {
+                  Position position,
+                  PlayerStatLeague playerStatLeague) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.jerseyNumber = jerseyNumber;
         this.position = position;
+        this.playerStatLeague = playerStatLeague;
+    }
+
+    public Player() {
     }
 
     public Long getId() {
@@ -66,11 +81,11 @@ public class Player {
         this.jerseyNumber = jerseyNumber;
     }
 
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 
