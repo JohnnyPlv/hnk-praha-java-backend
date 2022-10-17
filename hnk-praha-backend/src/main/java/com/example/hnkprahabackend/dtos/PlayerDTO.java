@@ -1,6 +1,8 @@
 package com.example.hnkprahabackend.dtos;
 
 import com.example.hnkprahabackend.models.Player;
+import com.example.hnkprahabackend.models.PlayerStatLeague;
+import com.example.hnkprahabackend.models.PlayerStatTournament;
 
 public class PlayerDTO {
     public final Long playerId;
@@ -9,16 +11,10 @@ public class PlayerDTO {
     public final Integer jerseyNumber;
     public final String position;
     public final boolean active;
-    public final String firstSeason;
-    public final Integer seasonPlayed;
-    public final Integer matchesPlayed;
-    public final Integer goalsScored;
-    public final Integer golieZeroMinutes;
-    public final Integer yellowCards;
-    public final Integer redCards;
-    public final Integer bestPlayedCount;
+    public final PlayerStatLeague playerStatLeague;
 
-    public final Double averageGoalScored;
+    public final PlayerStatTournament playerStatTournament;
+
 
     public PlayerDTO(Player player) {
         this.playerId = player.getId();
@@ -27,14 +23,7 @@ public class PlayerDTO {
         this.jerseyNumber = player.getJerseyNumber();
         this.position = player.getPosition().toString();
         this.active = player.isActive();
-        this.firstSeason = player.getPlayerStatLeague().getFirstSeason();
-        this.seasonPlayed = player.getPlayerStatLeague().getSeasonPlayed();
-        this.matchesPlayed = player.getPlayerStatLeague().getMatchesPlayed();
-        this.goalsScored = player.getPlayerStatLeague().getGoalsScored();
-        this.golieZeroMinutes = player.getPlayerStatLeague().getGolieZeroMinutes();
-        this.yellowCards = player.getPlayerStatLeague().getYellowCards();
-        this.redCards = player.getPlayerStatLeague().getRedCards();
-        this.bestPlayedCount = player.getPlayerStatLeague().getBestPlayedCount();
-        this.averageGoalScored = player.getPlayerStatLeague().getGoalPerMatch();
+        this.playerStatLeague = player.getPlayerStatLeague();
+        this.playerStatTournament = player.getPlayerStatTournament();
     }
 }

@@ -20,30 +20,33 @@ public class Player {
 
     private boolean active;
 
-    @OneToOne
-    private PlayerStatTournament playerStatTournament;
-
-    public PlayerStatLeague getPlayerStatLeague() {
-        return playerStatLeague;
-    }
-
-    public void setPlayerStatLeague(PlayerStatLeague playerStatLeague) {
-        this.playerStatLeague = playerStatLeague;
-    }
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private HNKPraha hnkPraha;
 
     @OneToOne (cascade=CascadeType.ALL)
     private PlayerStatLeague playerStatLeague;
+
+    @OneToOne (cascade=CascadeType.ALL)
+    private PlayerStatTournament playerStatTournament;
+
+
 
     public Player(String firstName,
                   String lastName,
                   Integer jerseyNumber,
                   Position position,
-                  PlayerStatLeague playerStatLeague) {
+                  boolean active,
+                  PlayerStatLeague playerStatLeague,
+                  PlayerStatTournament playerStatTournament,
+                  HNKPraha hnkPraha) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.jerseyNumber = jerseyNumber;
         this.position = position;
+        this.active = active;
         this.playerStatLeague = playerStatLeague;
+        this.playerStatTournament = playerStatTournament;
+        this.hnkPraha = hnkPraha;
     }
 
     public Player() {
@@ -95,5 +98,29 @@ public class Player {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public PlayerStatLeague getPlayerStatLeague() {
+        return playerStatLeague;
+    }
+
+    public void setPlayerStatLeague(PlayerStatLeague playerStatLeague) {
+        this.playerStatLeague = playerStatLeague;
+    }
+
+    public PlayerStatTournament getPlayerStatTournament() {
+        return playerStatTournament;
+    }
+
+    public void setPlayerStatTournament(PlayerStatTournament playerStatTournament) {
+        this.playerStatTournament = playerStatTournament;
+    }
+
+    public HNKPraha getHnkPraha() {
+        return hnkPraha;
+    }
+
+    public void setHnkPraha(HNKPraha hnkPraha) {
+        this.hnkPraha = hnkPraha;
     }
 }

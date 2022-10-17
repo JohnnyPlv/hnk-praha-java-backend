@@ -24,14 +24,9 @@ public class RestController {
         this.mappingService = mappingService;
     }
 
-//    @GetMapping("/getPlayers")
-//    public ResponseEntity<List<PlayerDTO>> (){
-//        List<Player> players = playerService.findAll();
-//        List<PlayerDTO> playerDTOS = mappingService.mapPlayers(players);
-//        return playerDTOS;
-//    }
 
-    @GetMapping("/getPlayers")
+
+    @GetMapping("/players")
     public ResponseEntity<List<PlayerDTO>> search(){
 
         List<Player> players = playerService.findAll();

@@ -11,14 +11,13 @@ public class PlayerStatTournament {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstSeason;
-    private Integer seasonPlayed;
     private Integer matchesPlayed;
     private Integer goalsScored;
-    private Integer golieZeroMinutes;
-    private Integer yellowCards;
-    private Integer redCards;
-    private Integer bestPlayedCount;
+
+    public PlayerStatTournament(Integer matchesPlayed, Integer goalsScored) {
+        this.matchesPlayed = matchesPlayed;
+        this.goalsScored = goalsScored;
+    }
 
     public PlayerStatTournament() {
     }
@@ -29,22 +28,6 @@ public class PlayerStatTournament {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getFirstSeason() {
-        return firstSeason;
-    }
-
-    public void setFirstSeason(String firstSeason) {
-        this.firstSeason = firstSeason;
-    }
-
-    public Integer getSeasonPlayed() {
-        return seasonPlayed;
-    }
-
-    public void setSeasonPlayed(Integer seasonPlayed) {
-        this.seasonPlayed = seasonPlayed;
     }
 
     public Integer getMatchesPlayed() {
@@ -63,35 +46,5 @@ public class PlayerStatTournament {
         this.goalsScored = goalsScored;
     }
 
-    public Integer getGolieZeroMinutes() {
-        return golieZeroMinutes;
-    }
 
-    public void setGolieZeroMinutes(Integer golieZeroMinutes) {
-        this.golieZeroMinutes = golieZeroMinutes;
-    }
-
-    public Integer getYellowCards() {
-        return yellowCards;
-    }
-
-    public void setYellowCards(Integer yellowCards) {
-        this.yellowCards = yellowCards;
-    }
-
-    public Integer getRedCards() {
-        return redCards;
-    }
-
-    public void setRedCards(Integer redCards) {
-        this.redCards = redCards;
-    }
-
-    public Integer getBestPlayedCount() {
-        return bestPlayedCount;
-    }
-
-    public void setBestPlayedCount(Integer bestPlayedCount) {
-        this.bestPlayedCount = bestPlayedCount;
-    }
 }
