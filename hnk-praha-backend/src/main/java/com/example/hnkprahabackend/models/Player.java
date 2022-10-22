@@ -3,6 +3,7 @@ package com.example.hnkprahabackend.models;
 import com.example.hnkprahabackend.types.Position;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Player {
@@ -22,6 +23,9 @@ public class Player {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     private HNKPraha hnkPraha;
+
+    @ManyToMany(mappedBy = "players", cascade = CascadeType.ALL)
+    private List<Formation> formations;
 
     @OneToOne (cascade=CascadeType.ALL)
     private PlayerStatLeague playerStatLeague;
