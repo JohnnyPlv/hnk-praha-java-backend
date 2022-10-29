@@ -12,7 +12,6 @@ public class PlayerDTO {
     public final String position;
     public final boolean active;
     public final PlayerStatLeague playerStatLeague;
-
     public final PlayerStatTournament playerStatTournament;
 
 

@@ -10,6 +10,7 @@ public class HNKPraha {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
     private Integer seasonCount;
     private Integer matchesCount;
     private Integer goalScored;
@@ -21,7 +22,8 @@ public class HNKPraha {
     public HNKPraha() {
     }
 
-    public HNKPraha(Integer seasonCount, Integer matchesCount, Integer goalScored, Integer goalConceded) {
+    public HNKPraha(String name,Integer seasonCount, Integer matchesCount, Integer goalScored, Integer goalConceded) {
+        this.name = name;
         this.seasonCount = seasonCount;
         this.matchesCount = matchesCount;
         this.goalScored = goalScored;
@@ -61,6 +63,13 @@ public class HNKPraha {
         this.goalConceded = goalConceded;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public List<Player> getPlayers() {
         return players;

@@ -18,6 +18,10 @@ public class Season {
     public Season() {
     }
 
+    public Season(String year) {
+        this.year = year;
+    }
+
     public Season(String year, List<Round> rounds) {
         this.year = year;
         this.rounds = new ArrayList<>(rounds);
