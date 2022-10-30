@@ -39,4 +39,9 @@ public class PlayerServiceImpl implements PlayerService{
         return playerRepository.findAll();
     }
 
+    @Override
+    public List<Player> findPlayersByIds(List<Long> playersIds) {
+        return playerRepository.findAllById(playersIds);
+    }
+
 }

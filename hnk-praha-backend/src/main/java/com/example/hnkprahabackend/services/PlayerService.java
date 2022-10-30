@@ -14,4 +14,6 @@ public interface PlayerService {
     Player findPlayerByName(String name);
 
     List<Player> findAll();
+
+    List<Player> findPlayersByIds(List<Long> playersIds);
 }
