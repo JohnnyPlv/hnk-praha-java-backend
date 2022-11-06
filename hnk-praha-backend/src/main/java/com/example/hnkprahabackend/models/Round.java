@@ -13,6 +13,10 @@ public class Round {
 
     private String result;
 
+    private Integer hnkPrahaGoals;
+
+    private Integer opponentTeamGoals;
+
     @OneToOne(cascade = CascadeType.MERGE)
     private Player bestPlayer;
 
@@ -110,5 +114,21 @@ public class Round {
 
     public void setFormation(Formation formation) {
         this.formation = formation;
+    }
+
+    public Integer getHnkPrahaGoals() {
+        return hnkPrahaGoals;
+    }
+
+    public void setHnkPrahaGoals(Integer hnkPrahaGoals) {
+        this.hnkPrahaGoals = hnkPrahaGoals;
+    }
+
+    public Integer getOpponentTeamGoals() {
+        return opponentTeamGoals;
+    }
+
+    public void setOpponentTeamGoals(Integer opponentTeamGoals) {
+        this.opponentTeamGoals = opponentTeamGoals;
     }
 }

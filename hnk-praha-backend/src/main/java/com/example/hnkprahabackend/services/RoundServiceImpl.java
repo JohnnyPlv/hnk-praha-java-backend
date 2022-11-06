@@ -1,5 +1,6 @@
 package com.example.hnkprahabackend.services;
 
+import com.example.hnkprahabackend.dtos.ResultDTO;
 import com.example.hnkprahabackend.models.Player;
 import com.example.hnkprahabackend.models.Round;
 import com.example.hnkprahabackend.repositories.RoundRepository;
@@ -32,6 +33,22 @@ public class RoundServiceImpl implements RoundService {
             return null;
         }
         round.setBestPlayer(player);
+        return roundRepository.save(round);
+    }
+
+    @Override
+    public Round assignResult(Long roundId,ResultDTO resultDTO) {
+        Round round = roundRepository.findById(roundId).orElse(null);
+        if (round == null) {
+            return null;
+        }
+        Integer hnkPrahaGoals = resultDTO.getHnkPrahaGoals();
+        Integer opponentTeamGoals = resultDTO.getOpponentTeamGoals();
+        round.setHnkPrahaGoals(hnkPrahaGoals);
+        round.setOpponentTeamGoals(opponentTeamGoals);
+        String result = hnkPrahaGoals + ":" + opponentTeamGoals;
+
+        round.setResult(result);
         return roundRepository.save(round);
     }
 }

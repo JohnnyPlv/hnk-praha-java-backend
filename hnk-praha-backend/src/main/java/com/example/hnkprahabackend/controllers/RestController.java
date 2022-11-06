@@ -1,6 +1,7 @@
 package com.example.hnkprahabackend.controllers;
 
 import com.example.hnkprahabackend.dtos.PlayerDTO;
+import com.example.hnkprahabackend.dtos.ResultDTO;
 import com.example.hnkprahabackend.dtos.SeasonDTO;
 import com.example.hnkprahabackend.models.Formation;
 import com.example.hnkprahabackend.models.Player;
@@ -71,6 +72,21 @@ public class RestController {
 
         try {
             Round round = roundService.assignBestPlayer(roundId,playerId);
+            if (round == null) {
+                return new  ResponseEntity<>("BAD_GATEWAY",HttpStatus.OK);
+            } else {
+                return new  ResponseEntity<>("OK",HttpStatus.OK);
+            }
+        } catch (DataAccessException e) {
+            return new  ResponseEntity<>("ERROR",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/round/{roundId}/set-result")
+    public ResponseEntity<String> assignResult(@PathVariable Long roundId, @RequestBody ResultDTO resultDTO){
+
+        try {
+            Round round = roundService.assignResult(roundId,resultDTO);
             if (round == null) {
                 return new  ResponseEntity<>("BAD_GATEWAY",HttpStatus.OK);
             } else {

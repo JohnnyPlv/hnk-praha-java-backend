@@ -1,5 +1,6 @@
 package com.example.hnkprahabackend.services;
 
+import com.example.hnkprahabackend.dtos.ResultDTO;
 import com.example.hnkprahabackend.models.Player;
 import com.example.hnkprahabackend.models.Round;
 import org.springframework.stereotype.Service;
@@ -9,4 +10,6 @@ public interface RoundService {
     Round findRoundById(Long id);
 
     Round assignBestPlayer(Long playerId, Long roundId);
+
+    Round assignResult(Long roundId, ResultDTO resultDTO);
 }
