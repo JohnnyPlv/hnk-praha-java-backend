@@ -9,6 +9,8 @@ import java.util.List;
 public interface PlayerService {
     Player addNewPlayer(Player player);
 
+    Player findPlayerById(Long id);
+
     Player updateNewPlayer(Player player);
 
     Player findPlayerByName(String name);

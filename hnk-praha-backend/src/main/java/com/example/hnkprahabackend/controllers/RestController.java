@@ -4,19 +4,14 @@ import com.example.hnkprahabackend.dtos.PlayerDTO;
 import com.example.hnkprahabackend.dtos.SeasonDTO;
 import com.example.hnkprahabackend.models.Formation;
 import com.example.hnkprahabackend.models.Player;
+import com.example.hnkprahabackend.models.Round;
 import com.example.hnkprahabackend.models.Season;
-import com.example.hnkprahabackend.services.FormationService;
-import com.example.hnkprahabackend.services.MappingService;
-import com.example.hnkprahabackend.services.PlayerService;
-import com.example.hnkprahabackend.services.SeasonService;
+import com.example.hnkprahabackend.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,15 +22,17 @@ public class RestController {
 
     private final SeasonService seasonService;
     private final MappingService mappingService;
-
     private final FormationService formationService;
 
+    private final RoundService roundService;
+
     @Autowired
-    public RestController(PlayerService playerService, SeasonService seasonService, MappingService mappingService, FormationService formationService) {
+    public RestController(PlayerService playerService, SeasonService seasonService, MappingService mappingService, FormationService formationService, RoundService roundService) {
         this.playerService = playerService;
         this.seasonService = seasonService;
         this.mappingService = mappingService;
         this.formationService = formationService;
+        this.roundService = roundService;
     }
 
     @GetMapping("/players")
@@ -68,4 +65,20 @@ public class RestController {
             return new  ResponseEntity<>("ERROR",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PutMapping("/round/{roundId}/best-player/{playerId}")
+    public ResponseEntity<String> assignBestPlayer(@PathVariable Long roundId, @PathVariable Long playerId){
+
+        try {
+            Round round = roundService.assignBestPlayer(roundId,playerId);
+            if (round == null) {
+                return new  ResponseEntity<>("BAD_GATEWAY",HttpStatus.OK);
+            } else {
+                return new  ResponseEntity<>("OK",HttpStatus.OK);
+            }
+        } catch (DataAccessException e) {
+            return new  ResponseEntity<>("ERROR",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

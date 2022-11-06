@@ -24,6 +24,11 @@ public class PlayerServiceImpl implements PlayerService{
     }
 
     @Override
+    public Player findPlayerById(Long playerId) {
+        return playerRepository.findById(playerId).orElse(null);
+    }
+
+    @Override
     public Player updateNewPlayer(Player player) {
         return playerRepository.save(player);
     }
