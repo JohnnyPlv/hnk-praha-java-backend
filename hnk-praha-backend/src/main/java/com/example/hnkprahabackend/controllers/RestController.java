@@ -1,12 +1,10 @@
 package com.example.hnkprahabackend.controllers;
 
 import com.example.hnkprahabackend.dtos.PlayerDTO;
+import com.example.hnkprahabackend.dtos.PlayerGoalsPerMatchDTO;
 import com.example.hnkprahabackend.dtos.ResultDTO;
 import com.example.hnkprahabackend.dtos.SeasonDTO;
-import com.example.hnkprahabackend.models.Formation;
-import com.example.hnkprahabackend.models.Player;
-import com.example.hnkprahabackend.models.Round;
-import com.example.hnkprahabackend.models.Season;
+import com.example.hnkprahabackend.models.*;
 import com.example.hnkprahabackend.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -20,20 +18,21 @@ import java.util.List;
 
 public class RestController {
     private final PlayerService playerService;
-
     private final SeasonService seasonService;
     private final MappingService mappingService;
     private final FormationService formationService;
-
     private final RoundService roundService;
 
+    private final PlayerGoalsPerMatchService playerGoalsPerMatchService;
+
     @Autowired
-    public RestController(PlayerService playerService, SeasonService seasonService, MappingService mappingService, FormationService formationService, RoundService roundService) {
+    public RestController(PlayerService playerService, SeasonService seasonService, MappingService mappingService, FormationService formationService, RoundService roundService, PlayerGoalsPerMatchService playerGoalsPerMatchService) {
         this.playerService = playerService;
         this.seasonService = seasonService;
         this.mappingService = mappingService;
         this.formationService = formationService;
         this.roundService = roundService;
+        this.playerGoalsPerMatchService = playerGoalsPerMatchService;
     }
 
     @GetMapping("/players")
@@ -88,6 +87,24 @@ public class RestController {
         try {
             Round round = roundService.assignResult(roundId,resultDTO);
             if (round == null) {
+                return new  ResponseEntity<>("BAD_GATEWAY",HttpStatus.OK);
+            } else {
+                return new  ResponseEntity<>("OK",HttpStatus.OK);
+            }
+        } catch (DataAccessException e) {
+            return new  ResponseEntity<>("ERROR",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/round/{roundId}/player/{playerId}/set-goals")
+    public ResponseEntity<String> assignPlayerGoalsPerMatch(@PathVariable Long roundId,
+                                                            @PathVariable Long playerId,
+                                                            @RequestBody PlayerGoalsPerMatchDTO playerGoalsPerMatchDTO){
+
+        try {
+            PlayerGoalsPerMatch playerGoalsPerMatch = playerGoalsPerMatchService
+                    .assignPlayerGoalsPerMatch(roundId,playerId,playerGoalsPerMatchDTO.getPlayerGoalsPerMatch());
+            if (playerGoalsPerMatch == null) {
                 return new  ResponseEntity<>("BAD_GATEWAY",HttpStatus.OK);
             } else {
                 return new  ResponseEntity<>("OK",HttpStatus.OK);

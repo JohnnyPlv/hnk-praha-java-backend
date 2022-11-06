@@ -33,6 +33,8 @@ public class Player {
     @OneToOne (cascade=CascadeType.ALL)
     private PlayerStatTournament playerStatTournament;
 
+    @OneToMany (mappedBy = "player", cascade = CascadeType.ALL)
+    private List<PlayerGoalsPerMatch> playerGoalsPerMatch;
 
 
     public Player(String firstName,
