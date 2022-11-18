@@ -1,9 +1,6 @@
 package com.example.hnkprahabackend.services;
 
-import com.example.hnkprahabackend.dtos.FormationDTO;
-import com.example.hnkprahabackend.dtos.PlayerDTO;
-import com.example.hnkprahabackend.dtos.RoundDTO;
-import com.example.hnkprahabackend.dtos.SeasonDTO;
+import com.example.hnkprahabackend.dtos.*;
 import com.example.hnkprahabackend.models.Player;
 import com.example.hnkprahabackend.models.Round;
 import com.example.hnkprahabackend.models.Season;
@@ -22,6 +19,11 @@ public class MappingServiceImpl implements MappingService{
     }
 
     @Override
+    public List<PlayerInFormationDTO> mapPlayersInFormation(List<Player> listOfPlayers, Long roundId) {
+        return listOfPlayers.stream().map(val -> new PlayerInFormationDTO(val, roundId)).collect(Collectors.toList());
+    }
+
+    @Override
     public List<SeasonDTO> mapSeasons(List<Season> listOfSeasons) {
 
         return listOfSeasons
@@ -33,7 +35,7 @@ public class MappingServiceImpl implements MappingService{
     @Override
     public List<RoundDTO> mapRounds(List<Round> listOfRounds) {
         return listOfRounds.stream()
-                .map(val -> val.getFormation() != null ? new RoundDTO(val, new FormationDTO(val.getFormation(),mapPlayers(val.getFormation().getPlayers())))
+                .map(val -> val.getFormation() != null ? new RoundDTO(val, new FormationDTO(val.getFormation(),mapPlayersInFormation(val.getFormation().getPlayers(), val.getId())))
                         : new RoundDTO(val))
                 .collect(Collectors.toList());
     }
