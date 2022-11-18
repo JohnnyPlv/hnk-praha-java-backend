@@ -1,7 +1,7 @@
 package com.example.hnkprahabackend.controllers;
 
 import com.example.hnkprahabackend.dtos.PlayerDTO;
-import com.example.hnkprahabackend.dtos.PlayerGoalsPerMatchDTO;
+import com.example.hnkprahabackend.dtos.PlayerStatsPerMatchDTO;
 import com.example.hnkprahabackend.dtos.ResultDTO;
 import com.example.hnkprahabackend.dtos.SeasonDTO;
 import com.example.hnkprahabackend.models.*;
@@ -23,16 +23,16 @@ public class RestController {
     private final FormationService formationService;
     private final RoundService roundService;
 
-    private final PlayerGoalsPerMatchService playerGoalsPerMatchService;
+    private final PlayerStatsPerMatchService playerStatsPerMatchService;
 
     @Autowired
-    public RestController(PlayerService playerService, SeasonService seasonService, MappingService mappingService, FormationService formationService, RoundService roundService, PlayerGoalsPerMatchService playerGoalsPerMatchService) {
+    public RestController(PlayerService playerService, SeasonService seasonService, MappingService mappingService, FormationService formationService, RoundService roundService, PlayerStatsPerMatchService playerStatsPerMatchService) {
         this.playerService = playerService;
         this.seasonService = seasonService;
         this.mappingService = mappingService;
         this.formationService = formationService;
         this.roundService = roundService;
-        this.playerGoalsPerMatchService = playerGoalsPerMatchService;
+        this.playerStatsPerMatchService = playerStatsPerMatchService;
     }
 
     @GetMapping("/players")
@@ -96,14 +96,14 @@ public class RestController {
         }
     }
 
-    @PostMapping("/round/{roundId}/player/{playerId}/set-goals")
-    public ResponseEntity<String> assignPlayerGoalsPerMatch(@PathVariable Long roundId,
+    @PostMapping("/round/{roundId}/player/{playerId}/set-stats")
+    public ResponseEntity<String> assignPlayerStatsPerMatch(@PathVariable Long roundId,
                                                             @PathVariable Long playerId,
-                                                            @RequestBody PlayerGoalsPerMatchDTO playerGoalsPerMatchDTO){
+                                                            @RequestBody PlayerStatsPerMatchDTO playerStatsPerMatchDTO){
 
         try {
-            PlayerStatsPerMatch playerStatsPerMatch = playerGoalsPerMatchService
-                    .assignPlayerGoalsPerMatch(roundId,playerId,playerGoalsPerMatchDTO.getPlayerGoalsPerMatch());
+            PlayerStatsPerMatch playerStatsPerMatch = playerStatsPerMatchService
+                    .assignPlayerStatsPerMatch(roundId,playerId, playerStatsPerMatchDTO);
             if (playerStatsPerMatch == null) {
                 return new  ResponseEntity<>("BAD_GATEWAY",HttpStatus.OK);
             } else {

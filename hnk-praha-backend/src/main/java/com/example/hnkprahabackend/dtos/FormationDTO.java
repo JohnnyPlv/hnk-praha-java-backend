@@ -7,10 +7,10 @@ import java.util.List;
 public class FormationDTO {
 
     public final Long id;
-    public final List<PlayerDTO> playerDTOS;
+    public final List<PlayerDTO> player;
 
-    public FormationDTO(Formation formation, List<PlayerDTO> playerDTOS) {
+    public FormationDTO(Formation formation, List<PlayerDTO> player) {
         this.id = formation.getId();
-        this.playerDTOS = playerDTOS;
+        this.player = player;
     }
 }

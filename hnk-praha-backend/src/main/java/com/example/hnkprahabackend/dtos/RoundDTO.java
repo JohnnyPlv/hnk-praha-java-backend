@@ -3,7 +3,6 @@ package com.example.hnkprahabackend.dtos;
 import com.example.hnkprahabackend.models.*;
 
 import java.util.Date;
-import java.util.List;
 
 public class RoundDTO {
     public final Long id;
@@ -19,9 +18,9 @@ public class RoundDTO {
     public final String homeTeam;
     public final OpponentTeam opponentTeam;
 
-    public FormationDTO formationDTO;
+    public FormationDTO formation;
 
-    public RoundDTO(Round round, FormationDTO formationDTO) {
+    public RoundDTO(Round round, FormationDTO formation) {
         this.id = round.getId();
         this.date = round.getDate();
         this.result = round.getResult();
@@ -29,7 +28,7 @@ public class RoundDTO {
         this.playground = round.getPlayground();
         this.homeTeam = round.getHnkPraha().getName();
         this.opponentTeam = round.getOpponentTeam();
-        this.formationDTO = formationDTO;
+        this.formation = formation;
     }
 
     public RoundDTO(Round round) {

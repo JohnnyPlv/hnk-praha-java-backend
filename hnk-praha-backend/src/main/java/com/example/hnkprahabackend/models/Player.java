@@ -129,4 +129,12 @@ public class Player {
     public void setHnkPraha(HNKPraha hnkPraha) {
         this.hnkPraha = hnkPraha;
     }
+
+    public List<PlayerStatsPerMatch> getPlayerStatsPerMatches() {
+        return playerStatsPerMatches;
+    }
+
+    public void setPlayerStatsPerMatches(List<PlayerStatsPerMatch> playerStatsPerMatches) {
+        this.playerStatsPerMatches = playerStatsPerMatches;
+    }
 }

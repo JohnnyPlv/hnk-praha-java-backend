@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PlayerGoalsPerMatchRepository extends JpaRepository<PlayerStatsPerMatch, Long> {
-    Optional<PlayerStatsPerMatch> findPlayerGoalsPerMatchByRoundIdAndPlayerId(Long roundId, Long playerId);
+public interface PlayerStatsPerMatchRepository extends JpaRepository<PlayerStatsPerMatch, Long> {
+    Optional<PlayerStatsPerMatch> findPlayerStatsPerMatchByRoundIdAndPlayerId(Long roundId, Long playerId);
 }

@@ -26,10 +26,12 @@ public class PlayerStatsPerMatch {
     public PlayerStatsPerMatch() {
     }
 
-    public PlayerStatsPerMatch(Season season, Round round, Integer numberOfGoals, Player player) {
+    public PlayerStatsPerMatch(Season season, Round round, Integer numberOfGoals,Integer numberOfYellowCards, Integer numberOfRedCards, Player player) {
         this.season = season;
         this.round = round;
         this.numberOfGoals = numberOfGoals;
+        this.numberOfYellowCards = numberOfYellowCards;
+        this.numberOfRedCards = numberOfRedCards;
         this.player = player;
     }
 
@@ -63,5 +65,21 @@ public class PlayerStatsPerMatch {
 
     public void setNumberOfGoals(Integer numberOfGoals) {
         this.numberOfGoals = numberOfGoals;
+    }
+
+    public Integer getNumberOfYellowCards() {
+        return numberOfYellowCards;
+    }
+
+    public void setNumberOfYellowCards(Integer numberOfYellowCards) {
+        this.numberOfYellowCards = numberOfYellowCards;
+    }
+
+    public Integer getNumberOfRedCards() {
+        return numberOfRedCards;
+    }
+
+    public void setNumberOfRedCards(Integer numberOfRedCards) {
+        this.numberOfRedCards = numberOfRedCards;
     }
 }
