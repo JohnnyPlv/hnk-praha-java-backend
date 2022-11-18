@@ -102,9 +102,9 @@ public class RestController {
                                                             @RequestBody PlayerGoalsPerMatchDTO playerGoalsPerMatchDTO){
 
         try {
-            PlayerGoalsPerMatch playerGoalsPerMatch = playerGoalsPerMatchService
+            PlayerStatsPerMatch playerStatsPerMatch = playerGoalsPerMatchService
                     .assignPlayerGoalsPerMatch(roundId,playerId,playerGoalsPerMatchDTO.getPlayerGoalsPerMatch());
-            if (playerGoalsPerMatch == null) {
+            if (playerStatsPerMatch == null) {
                 return new  ResponseEntity<>("BAD_GATEWAY",HttpStatus.OK);
             } else {
                 return new  ResponseEntity<>("OK",HttpStatus.OK);

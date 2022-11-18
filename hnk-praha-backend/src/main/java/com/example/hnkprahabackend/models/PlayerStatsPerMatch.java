@@ -3,7 +3,7 @@ package com.example.hnkprahabackend.models;
 import javax.persistence.*;
 
 @Entity
-public class PlayerGoalsPerMatch {
+public class PlayerStatsPerMatch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,10 +19,14 @@ public class PlayerGoalsPerMatch {
 
     private Integer numberOfGoals;
 
-    public PlayerGoalsPerMatch() {
+    private Integer numberOfYellowCards;
+
+    private Integer numberOfRedCards;
+
+    public PlayerStatsPerMatch() {
     }
 
-    public PlayerGoalsPerMatch(Season season, Round round, Integer numberOfGoals, Player player) {
+    public PlayerStatsPerMatch(Season season, Round round, Integer numberOfGoals, Player player) {
         this.season = season;
         this.round = round;
         this.numberOfGoals = numberOfGoals;

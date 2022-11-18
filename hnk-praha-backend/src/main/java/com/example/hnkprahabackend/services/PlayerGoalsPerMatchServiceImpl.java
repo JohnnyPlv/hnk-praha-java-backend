@@ -1,7 +1,7 @@
 package com.example.hnkprahabackend.services;
 
 import com.example.hnkprahabackend.models.Player;
-import com.example.hnkprahabackend.models.PlayerGoalsPerMatch;
+import com.example.hnkprahabackend.models.PlayerStatsPerMatch;
 import com.example.hnkprahabackend.models.Round;
 import com.example.hnkprahabackend.models.Season;
 import com.example.hnkprahabackend.repositories.PlayerGoalsPerMatchRepository;
@@ -21,7 +21,7 @@ public class PlayerGoalsPerMatchServiceImpl implements PlayerGoalsPerMatchServic
     }
 
     @Override
-    public PlayerGoalsPerMatch assignPlayerGoalsPerMatch(Long roundId, Long playerId, Integer goals) {
+    public PlayerStatsPerMatch assignPlayerGoalsPerMatch(Long roundId, Long playerId, Integer goals) {
         if (goals == null) {
             return null;
         }
@@ -31,22 +31,22 @@ public class PlayerGoalsPerMatchServiceImpl implements PlayerGoalsPerMatchServic
         if (season == null || player == null) {
             return null;
         }
-        PlayerGoalsPerMatch playerGoalsPerMatch = playerGoalsPerMatchRepository
+        PlayerStatsPerMatch playerStatsPerMatch = playerGoalsPerMatchRepository
                 .findPlayerGoalsPerMatchByRoundIdAndPlayerId(roundId,playerId)
                 .orElse(null);
-        if (playerGoalsPerMatch == null) {
-            return playerGoalsPerMatchRepository.save(new PlayerGoalsPerMatch(season, round, goals, player ));
+        if (playerStatsPerMatch == null) {
+            return playerGoalsPerMatchRepository.save(new PlayerStatsPerMatch(season, round, goals, player ));
         } else {
-            playerGoalsPerMatch.setSeason(season);
-            playerGoalsPerMatch.setPlayer(player);
-            playerGoalsPerMatch.setRound(round);
-            playerGoalsPerMatch.setNumberOfGoals(goals);
-            return playerGoalsPerMatchRepository.save(playerGoalsPerMatch);
+            playerStatsPerMatch.setSeason(season);
+            playerStatsPerMatch.setPlayer(player);
+            playerStatsPerMatch.setRound(round);
+            playerStatsPerMatch.setNumberOfGoals(goals);
+            return playerGoalsPerMatchRepository.save(playerStatsPerMatch);
         }
     }
 
     @Override
-    public PlayerGoalsPerMatch findPlayerGoalsPerMatchByRoundId(Long roundId, Long playerId) {
+    public PlayerStatsPerMatch findPlayerGoalsPerMatchByRoundId(Long roundId, Long playerId) {
         return playerGoalsPerMatchRepository.findPlayerGoalsPerMatchByRoundIdAndPlayerId(roundId, playerId).orElse(null);
     }
 }

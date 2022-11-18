@@ -1,5 +1,6 @@
 package com.example.hnkprahabackend.services;
 
+import com.example.hnkprahabackend.dtos.FormationDTO;
 import com.example.hnkprahabackend.dtos.PlayerDTO;
 import com.example.hnkprahabackend.dtos.RoundDTO;
 import com.example.hnkprahabackend.dtos.SeasonDTO;
@@ -31,6 +32,9 @@ public class MappingServiceImpl implements MappingService{
 
     @Override
     public List<RoundDTO> mapRounds(List<Round> listOfRounds) {
-        return listOfRounds.stream().map(val -> new RoundDTO(val)).collect(Collectors.toList());
+        return listOfRounds.stream()
+                .map(val -> val.getFormation() != null ? new RoundDTO(val, new FormationDTO(val.getFormation(),mapPlayers(val.getFormation().getPlayers())))
+                        : new RoundDTO(val))
+                .collect(Collectors.toList());
     }
 }
