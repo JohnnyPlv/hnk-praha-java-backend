@@ -19,8 +19,8 @@ public class MappingServiceImpl implements MappingService{
     }
 
     @Override
-    public List<PlayerInFormationDTO> mapPlayersInFormation(List<Player> listOfPlayers, Long roundId) {
-        return listOfPlayers.stream().map(val -> new PlayerInFormationDTO(val, roundId)).collect(Collectors.toList());
+    public List<PlayerDTO> mapPlayersInFormation(List<Player> listOfPlayers, Long roundId) {
+        return listOfPlayers.stream().map(val -> new PlayerDTO(val, roundId)).collect(Collectors.toList());
     }
 
     @Override

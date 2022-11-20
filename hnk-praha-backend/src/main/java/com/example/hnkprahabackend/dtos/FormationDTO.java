@@ -7,9 +7,9 @@ import java.util.List;
 public class FormationDTO {
 
     public final Long id;
-    public final List<PlayerInFormationDTO> player;
+    public final List<PlayerDTO> player;
 
-    public FormationDTO(Formation formation, List<PlayerInFormationDTO> player) {
+    public FormationDTO(Formation formation, List<PlayerDTO> player) {
         this.id = formation.getId();
         this.player = player;
     }
